@@ -1,3 +1,19 @@
+function init(){
+    const buttons = document.querySelectorAll(".flex-btn");
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => display(btn));
+    })
+}
+
+let currentOp = "";
+function display(button) {
+    const display = document.querySelector(".calc-display");
+   
+    display.textContent += button.textContent; //update display
+    currentOp += button.textContent; //update operation
+    console.log(`Clicked: ${button.textContent}`);
+    console.log(`Operation: ${currentOp}`);
+}
 function operate(operator, a, b) {
     console.log(operator);
     if(operator !== "+" && operator !== "-" && operator !== "*" && operator !== "/")
@@ -36,11 +52,13 @@ function divide(a, b) {
     return a / b;
 };
 
-let operation = prompt("Enter the operation you would like to perform (+, -, *, /): ")
-let a = parseFloat(prompt("Enter the first value of the operation: "));
-let b = parseFloat(prompt("Enter the second value of the operation: "));
-let result = operate(operation, a , b);
-console.log(result);
+init();
+
+// let operation = prompt("Enter the operation you would like to perform (+, -, *, /): ")
+// let a = parseFloat(prompt("Enter the first value of the operation: "));
+// let b = parseFloat(prompt("Enter the second value of the operation: "));
+// let result = operate(operation, a , b);
+// console.log(result);
 
 // console.log(`Addition: ${add(a, b)}`);
 // console.log(`Subtraction: ${subtract(a, b)}`);
