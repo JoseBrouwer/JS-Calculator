@@ -4,33 +4,44 @@
         <meta charset="UTF-8">
         <title>Calculator</title>
         <link rel="stylesheet" href="calculator.css">
-        <script src="calculator.js" defer></script>
+        <!-- <script src="calculator.js" defer></script> -->
     </head>
     <body>
         <div class="container">
+
             <div class="calc-body">
-                <div class="calc-display"></div>
-                <div class="flexCol-number-row1">
-                    <button class="flexItem-number-btn">7</button>
-                    <button class="flexItem-number-btn">8</button>
-                    <button class="flexItem-number-btn">9</button>
+
+                <div class="calc-display">Result</div>
+                
+                <div class="calc-buttons">
+                    <div class="flexRow">
+                        <button class="flex-btn">7</button>
+                        <button class="flex-btn">8</button>
+                        <button class="flex-btn">9</button>
+                        <button class="flex-btn operator">/</button>
+                    </div>
+                    <div class="flexRow">
+                        <button class="flex-btn">4</button>
+                        <button class="flex-btn">5</button>
+                        <button class="flex-btn">6</button>
+                        <button class="flex-btn operator">*</button>
+                    </div>
+                    <div class="flexRow">
+                        <button class="flex-btn">1</button>
+                        <button class="flex-btn">2</button>
+                        <button class="flex-btn">3</button>
+                        <button class="flex-btn operator">-</button>
+                    </div>
+                    <div class="flexRow">
+                        <button class="flex-btn">C</button>
+                        <button class="flex-btn">0</button>
+                        <button class="flex-btn">=</button>
+                        <button class="flex-btn operator">+</button>
+                    </div>
                 </div>
-                <div class="flexCol-number-row2">
-                    <button class="flexItem-number-btn">4</button>
-                    <button class="flexItem-number-btn">5</button>
-                    <button class="flexItem-number-btn">6</button>
-                </div>
-                <div class="flexCol-number-row3">
-                    <button class="flexItem-number-btn">1</button>
-                    <button class="flexItem-number-btn">2</button>
-                    <button class="flexItem-number-btn">3</button>
-                </div>
-                <div class="flexCol-number-row4">
-                    <button class="flexItem-number-btn">CE</button>
-                    <button class="flexItem-number-btn">0</button>
-                    <button class="flexItem-number-btn">=</button>
-                </div>
+
             </div>
+
         </div>
     </body>
 </html>
