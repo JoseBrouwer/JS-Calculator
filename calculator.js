@@ -52,7 +52,6 @@ function display(button) {
                             console.log(`multiplying ${parts[j]} by ${parts[operationIdx + 1]}`);
                             parts[j] *= parts[operationIdx + 1]; //multiply by denominator
                         }
-                            
                     }
                     console.log(`after multiplication ${parts}`);
                 }
@@ -62,9 +61,11 @@ function display(button) {
                 resultNumber = operate(operator, a, b);
 
                 parts.splice(operationIdx - 1, 3, resultNumber);
-
-                //parts = Array.prototype.concat(parts.slice(0, operationIdx), resultNumber, parts.slice(operationIdx + 1, parts.length))
                 console.log(parts);
+
+                resultString = String(parts[0]);
+                currentOp = resultString;
+                display.textContent = resultString;
             }
         }
         else
