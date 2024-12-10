@@ -1,18 +1,44 @@
+let currentOp = "", resultString = "", operator = "";
+let a, b, resultNumber;
+
 function init(){
     const buttons = document.querySelectorAll(".flex-btn");
     buttons.forEach(btn => {
         btn.addEventListener("click", () => display(btn));
     })
 }
-
-let currentOp = "";
 function display(button) {
     const display = document.querySelector(".calc-display");
-   
-    display.textContent += button.textContent; //update display
-    currentOp += button.textContent; //update operation
-    console.log(`Clicked: ${button.textContent}`);
-    console.log(`Operation: ${currentOp}`);
+    if(!button.classList.contains("equals") && !button.classList.contains("operator") && !button.classList.contains("clear")) //We are not evaluating or adding operator
+    {
+        display.textContent += button.textContent; //update display
+        currentOp += button.textContent; //update operation
+        console.log(`Clicked: ${button.textContent}`);
+        console.log(`Operation: ${currentOp}`);
+    }
+    else if(button.classList.contains("operator"))
+    {
+        //add spaces inbetween operator
+        display.textContent += (" " + button.textContent + " ");
+        currentOp += (" " + button.textContent + " ");
+    }
+    else if(button.classList.contains("equals")) //if we click equals
+    {
+        let parts = currentOp.split(" ");
+        a = parseFloat(parts[0]);
+        operator = parts[1];
+        b = parseFloat(parts[2]);
+        resultNumber = operate(operator, a, b);
+        resultString = String(resultNumber)
+        currentOp = resultString;
+        display.textContent = resultString;
+    }
+    else if(button.classList.contains("clear"))
+    {
+        currentOp = "";
+        display.textContent = "";
+    }
+    
 }
 function operate(operator, a, b) {
     console.log(operator);
