@@ -25,9 +25,6 @@ function display(button) {
     }
     else if(button.classList.contains("equals")) //if we click equals
     {
-        //modify to evaluate longer expressions and use PEMDAS
-        //check size of split, if its longer than three (always odd by taking a = result?)
-        //enforce PEMDAS from left to right by grouping operations
         let parts = currentOp.split(" ");
         if(parts.length > 3)
         {
@@ -36,7 +33,39 @@ function display(button) {
             console.log(`Before Sort: ${operatorList}`);
             operatorList.sort(oop); //sort the array to use PEMDAS
             console.log(`After Sort: ${operatorList}`);
-  
+
+            for(let i = 0; i < operatorList.length; i++)
+            {
+                let operationIdx = parts.indexOf(operatorList[i]);
+                if(operatorList[i] === "/") //if we must divide
+                {
+                    //find common denom by multiplying everything else by divisor
+                    for(let j = 0; j < parts.length; j++)
+                    {
+                        if((parts[j] === parts[operationIdx + 1]) && (j === operationIdx + 1))
+                        {
+                            console.log(`skipped ${parts[j]}`);
+                            continue; //skip the number we must divide by
+                        }
+                        else if(!isNaN(parseFloat(parts[j]))) //index is a number
+                        {
+                            console.log(`multiplying ${parts[j]} by ${parts[operationIdx + 1]}`);
+                            parts[j] *= parts[operationIdx + 1]; //multiply by denominator
+                        }
+                            
+                    }
+                    console.log(`after multiplication ${parts}`);
+                }
+                a = parseFloat(parts[operationIdx - 1]);
+                operator = parts[operationIdx];
+                b = parseFloat(parts[operationIdx + 1]);
+                resultNumber = operate(operator, a, b);
+
+                parts.splice(operationIdx - 1, 3, resultNumber);
+
+                //parts = Array.prototype.concat(parts.slice(0, operationIdx), resultNumber, parts.slice(operationIdx + 1, parts.length))
+                console.log(parts);
+            }
         }
         else
         {
@@ -69,7 +98,9 @@ function oop(a, b){
 }
 
 function operate(operator, a, b) {
-    console.log(operator);
+    console.log(`a: ${a}`);
+    console.log(`operator: ${operator}`);
+    console.log(`b: ${b}`);
     if(operator !== "+" && operator !== "-" && operator !== "*" && operator !== "/")
     {
         console.log("Not a valid operator. Operation will not complete.");
