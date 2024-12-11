@@ -26,7 +26,9 @@ function display(button) {
     else if(button.classList.contains("equals")) //if we click equals
     {
         let parts = currentOp.split(" ");
-        if(parts.length > 3)
+        if((parts[0] === '') || (parts.length === 1))
+            return;
+        if((parts.length > 3) && (parts.length % 2 === 1)) // more than 1 op and odd args
         {
             //return an array that contains all the operators in the expression
             let operatorList = parts.filter(operator => PEMDAS.includes(operator));
@@ -34,11 +36,18 @@ function display(button) {
             operatorList.sort(oop); //sort the array to use PEMDAS
             console.log(`After Sort: ${operatorList}`);
 
+            //for every operator
             for(let i = 0; i < operatorList.length; i++)
             {
                 let operationIdx = parts.indexOf(operatorList[i]);
                 if(operatorList[i] === "/") //if we must divide
                 {
+                    if(parts[operationIdx + 1] == 0) //must convert '0' to 0
+                    {
+                        currentOp = "";
+                        display.textContent = "Can not divide by 0. Clear to continue.";
+                        return;
+                    }
                     //find common denom by multiplying everything else by divisor
                     for(let j = 0; j < parts.length; j++)
                     {
@@ -130,23 +139,15 @@ function multiply(a, b) {
 };
 
 function divide(a, b) {
-    if(b === 0)
+    if(b == 0)
     {
-        console.error("Can not divide by 0");
+        const display = document.querySelector(".calc-display");
+        display.textContent = "Can not divide by 0";
+        currentOp = "";
         return;
     }
-    return a / b;
+    else
+        return a / b;
 };
 
 init();
-
-// let operation = prompt("Enter the operation you would like to perform (+, -, *, /): ")
-// let a = parseFloat(prompt("Enter the first value of the operation: "));
-// let b = parseFloat(prompt("Enter the second value of the operation: "));
-// let result = operate(operation, a , b);
-// console.log(result);
-
-// console.log(`Addition: ${add(a, b)}`);
-// console.log(`Subtraction: ${subtract(a, b)}`);
-// console.log(`Multiplication: ${multiply(a, b)}`);
-// console.log(`Division: ${divide(a, b)}`);
