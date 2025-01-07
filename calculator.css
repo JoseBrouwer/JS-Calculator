@@ -1,55 +1,59 @@
 * {
     box-sizing: border-box;
-    background-color: rgb(247, 223, 255);
+    background-color: rgb(240, 202, 253);
 }
 .container {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Use full viewport height */
+    width: 100vw; /* Use full viewport width */
 }
 .calc-body {
     display: flex;
-    width: 50%;
-    height: 50%;
     flex-direction: column;
-    margin: 0 auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    overflow: hidden; /* Prevent content from overflowing */
+    min-width: 500px; /* Make the calculator larger */
+    min-height: 600px; /* Default larger height */
+    background-color: rgb(231, 186, 245);
 }
 .calc-display {
-    width: 200px;
+    width: 100%;
+    height: auto;
     border: 2px solid black;
     padding: 10px;
+    font-size: 3rem;
     flex: 1;
     margin: -1px 0 -1px 0;
+    align-content: center;
 
     background-color: rgb(231, 186, 245);
 }
 .calc-buttons {
     display: flex;
     flex-direction: column;
-}
-.main-body {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
     flex: 1;
+    border: 2px solid black;
 }
+
 .flexRow {
     display: flex;
-    flex: 1;
     justify-content: space-between;
-    
-    width: 200px;
-    border: 2px solid black;
-    margin: -1px 0 -1px 0; /* collapse top and botton borders*/
-    padding: 5px;
-
-    background-color: rgb(231, 186, 245);
+    flex: 1;
+    border-top: 1px solid black;
 }
+
 .flex-btn {
-    border-radius: 10%;
     flex: 1;
     margin: 5px;
+    padding: 10px;
+    font-size: 1.5rem;
+    border-radius: 10%;
     cursor: pointer;
-
     background-color: rgb(227, 136, 255);
+    text-align: center;
 }
 
 .operator {
