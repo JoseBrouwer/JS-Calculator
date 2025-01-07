@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    background-color: rgb(247, 223, 255);
 }
 .container {
     display: flex;
@@ -12,11 +13,13 @@
     margin: 0 auto;
 }
 .calc-display {
-    /* width: 200px; */
+    width: 200px;
     border: 2px solid black;
     padding: 10px;
     flex: 1;
-    margin: 0 auto;
+    margin: -1px 0 -1px 0;
+
+    background-color: rgb(231, 186, 245);
 }
 .calc-buttons {
     display: flex;
@@ -35,17 +38,28 @@
     
     width: 200px;
     border: 2px solid black;
-    margin: 0 auto;
+    margin: -1px 0 -1px 0; /* collapse top and botton borders*/
     padding: 5px;
+
+    background-color: rgb(231, 186, 245);
 }
 .flex-btn {
-    border-radius: 50%;
+    border-radius: 10%;
     flex: 1;
     margin: 5px;
+    cursor: pointer;
+
+    background-color: rgb(227, 136, 255);
 }
 
-.operators {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
+.operator {
+    background-color: rgb(211, 68, 255);
+}
+
+.equals {
+    background-color: rgb(253, 76, 253);
+}
+
+.clear {
+    background-color: rgb(253, 76, 135);
 }
