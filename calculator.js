@@ -11,18 +11,9 @@ function init(){
     })
     disp.addEventListener("keydown", (e) => {
         if(!isNaN(e.key) && e.key !== ' ') //key pressed is a Number
-        {
-            disp.textContent += e.key; //update display
-            currentOp += e.key; //update operation
-            console.log(`Pressed: ${e.key}`);
-            console.log(`Operation: ${currentOp}`);
-        }
-        else if (['+', '-', '*', '/', '(', ')'].includes(e.key)) { // Check if key is an operator
-            disp.textContent += ` ${e.key} `;
-            currentOp += ` ${e.key} `;
-            console.log(`Pressed Operator: ${e.key}`);
-            console.log(`Operation: ${currentOp}`);
-        } 
+            update(e.key);
+        else if (['+', '-', '*', '/', '(', ')'].includes(e.key)) 
+            update(` ${e.key} `);
         else if (e.key === 'Enter') { // Evaluate on Enter key
             document.querySelector(".equals").click(); 
         } 
@@ -35,21 +26,20 @@ function init(){
         }
     });
 }
+function update(Stringinput) {
+    const disp = document.querySelector(".calc-display");
+
+    disp.textContent += Stringinput; //update display
+    currentOp += Stringinput; //update operation
+    console.log(`Pressed: ${Stringinput}`);
+    console.log(`Operation: ${currentOp}`);
+}
 function display(button) {
     const display = document.querySelector(".calc-display");
     if(!button.classList.contains("equals") && !button.classList.contains("operator") && !button.classList.contains("clear")) //We are not evaluating or adding operator
-    {
-        display.textContent += button.textContent; //update display
-        currentOp += button.textContent; //update operation
-        console.log(`Clicked: ${button.textContent}`);
-        console.log(`Operation: ${currentOp}`);
-    }
+        update(`${button.textContent}`);    
     else if(button.classList.contains("operator"))
-    {
-        //add spaces inbetween operator
-        display.textContent += (" " + button.textContent + " ");
-        currentOp += (" " + button.textContent + " ");
-    }
+        update(` ${button.textContent} `);
     else if(button.classList.contains("equals")) //if we click equals
     {
         let parts = currentOp.split(" ");
@@ -169,9 +159,8 @@ function divide(a, b) {
     if(b == 0)
     {
         const display = document.querySelector(".calc-display");
-        display.textContent = "Can not divide by 0";
         currentOp = "";
-        return;
+        return "Can not divide by 0. CLEAR to continue.";
     }
     else
         return a / b;
