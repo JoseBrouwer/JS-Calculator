@@ -4,9 +4,36 @@ const PEMDAS = ['(', ')', '**', '*', '/', '+', '-'];
 
 function init(){
     const buttons = document.querySelectorAll(".flex-btn");
+    const disp = document.querySelector(".calc-display");
+    disp.focus();
     buttons.forEach(btn => {
         btn.addEventListener("click", () => display(btn));
     })
+    disp.addEventListener("keydown", (e) => {
+        if(!isNaN(e.key) && e.key !== ' ') //key pressed is a Number
+        {
+            disp.textContent += e.key; //update display
+            currentOp += e.key; //update operation
+            console.log(`Pressed: ${e.key}`);
+            console.log(`Operation: ${currentOp}`);
+        }
+        else if (['+', '-', '*', '/', '(', ')'].includes(e.key)) { // Check if key is an operator
+            disp.textContent += ` ${e.key} `;
+            currentOp += ` ${e.key} `;
+            console.log(`Pressed Operator: ${e.key}`);
+            console.log(`Operation: ${currentOp}`);
+        } 
+        else if (e.key === 'Enter') { // Evaluate on Enter key
+            document.querySelector(".equals").click(); 
+        } 
+        else if (e.key === 'Backspace') { // Handle Backspace
+            disp.textContent = disp.textContent.slice(0, -1);
+            currentOp = currentOp.slice(0, -1);
+        } 
+        else if (e.key === 'Escape') { // Clear display on Escape key
+            document.querySelector(".clear").click();
+        }
+    });
 }
 function display(button) {
     const display = document.querySelector(".calc-display");
